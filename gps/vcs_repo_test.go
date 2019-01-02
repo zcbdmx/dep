@@ -7,6 +7,7 @@ package gps
 import (
 	"context"
 	"errors"
+	"flag"
 	"io/ioutil"
 	"os"
 	"testing"
@@ -141,11 +142,17 @@ func testSvnRepo(t *testing.T) {
 	}
 }
 
+var flagTestHg = flag.Bool("test-bitbucket", false, "test potentially hanging Bitbucket ops")
+
 func testHgRepo(t *testing.T) {
 	t.Parallel()
 
 	if testing.Short() {
 		t.Skip("Skipping slow test in short mode")
+	}
+	flag.Parse()
+	if !*flagTestHg {
+		t.Skip("skipping bitbucket tests which can sometimes hang")
 	}
 
 	ctx := context.Background()
@@ -169,8 +176,7 @@ func testHgRepo(t *testing.T) {
 	repo := &hgRepo{rep}
 
 	// Do an initial clone.
-	err = repo.get(ctx)
-	if err != nil {
+	if err := repo.get(ctx); err != nil {
 		t.Fatalf("Unable to clone Hg repo. Err was %s", err)
 	}
 
