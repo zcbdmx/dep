@@ -33,6 +33,8 @@ jobs:
       go: 1.9.x
     - <<: *simple-test
       go: tip
+      install:
+        - ssh-keyscan -t $TRAVIS_SSH_KEY_TYPES -H bitbucket.org >> ~/.ssh/known_hosts
     - <<: *simple-test
       os: osx
       go: 1.11.x
