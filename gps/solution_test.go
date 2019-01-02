@@ -78,10 +78,10 @@ func testWriteDepTree(t *testing.T) {
 				id: pi("launchpad.net/govcstestbzrrepo"),
 				v:  bzrv,
 			}, nil),
-			pa2lp(atom{
-				id: pi("bitbucket.org/sdboyer/withbm"),
-				v:  NewVersion("v1.0.0").Pair(Revision("aa110802a0c64195d0a6c375c9f66668827c90b4")),
-			}, nil),
+			//pa2lp(atom{
+			//id: pi("bitbucket.org/sdboyer/withbm"),
+			//v:  NewVersion("v1.0.0").Pair(Revision("aa110802a0c64195d0a6c375c9f66668827c90b4")),
+			//}, nil),
 		},
 	}
 
@@ -112,9 +112,9 @@ func testWriteDepTree(t *testing.T) {
 	if _, err = os.Stat(filepath.Join(tmp, "launchpad.net", "govcstestbzrrepo")); err != nil {
 		t.Errorf("Directory for launchpad.net/govcstestbzrrepo does not exist")
 	}
-	if _, err = os.Stat(filepath.Join(tmp, "bitbucket.org", "sdboyer", "withbm")); err != nil {
-		t.Errorf("Directory for bitbucket.org/sdboyer/withbm does not exist")
-	}
+	//if _, err = os.Stat(filepath.Join(tmp, "bitbucket.org", "sdboyer", "withbm")); err != nil {
+	//t.Errorf("Directory for bitbucket.org/sdboyer/withbm does not exist")
+	//}
 }
 
 func BenchmarkCreateVendorTree(b *testing.B) {
