@@ -457,7 +457,7 @@ func TestGetSources(t *testing.T) {
 
 	pil := []ProjectIdentifier{
 		mkPI("github.com/Masterminds/VCSTestRepo").normalize(),
-		mkPI("bitbucket.org/mattfarina/testhgrepo").normalize(),
+		//mkPI("bitbucket.org/mattfarina/testhgrepo").normalize(),
 		mkPI("launchpad.net/govcstestbzrrepo").normalize(),
 	}
 
@@ -507,8 +507,9 @@ func TestGetSources(t *testing.T) {
 	// nine entries (of which three are dupes): for each vcs, raw import path,
 	// the https url, and the http url. also three more from case folding of
 	// github.com/Masterminds/VCSTestRepo -> github.com/masterminds/vcstestrepo
-	if len(sm.srcCoord.nameToURL) != 12 {
-		t.Errorf("Should have twelve discrete entries in the nameToURL map, got %v", len(sm.srcCoord.nameToURL))
+	const numDiscreteEntries = 9
+	if len(sm.srcCoord.nameToURL) != numDiscreteEntries {
+		t.Errorf("Should have nine discrete entries in the nameToURL map, got %v", len(sm.srcCoord.nameToURL))
 	}
 	clean()
 }
