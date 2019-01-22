@@ -217,6 +217,7 @@ func (*gitSource) existsCallsListVersions() bool {
 func (s *gitSource) listVersions(ctx context.Context) (vlist []PairedVersion, err error) {
 	r := s.repo
 
+	fmt.Println("git ls-remote", r.Remote())
 	cmd := commandContext(ctx, "git", "ls-remote", r.Remote())
 	// We want to invoke from a place where it's not possible for there to be a
 	// .git file instead of a .git directory, as git ls-remote will choke on the
@@ -231,6 +232,7 @@ func (s *gitSource) listVersions(ctx context.Context) (vlist []PairedVersion, er
 	// Ensure no prompting for PWs
 	cmd.SetEnv(append([]string{"GIT_ASKPASS=", "GIT_TERMINAL_PROMPT=0"}, os.Environ()...))
 	out, err := cmd.CombinedOutput()
+	fmt.Println("git ls-remote complete:", r.Remote())
 	if err != nil {
 		return nil, errors.Wrap(err, string(out))
 	}
