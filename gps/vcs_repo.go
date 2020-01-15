@@ -59,10 +59,10 @@ func (r *gitRepo) get(ctx context.Context) error {
 		ctx,
 		"git",
 		"clone",
+		"--depth 1",
 		"--recursive",
 		"-v",
 		"--progress",
-		"--depth 1",
 		r.Remote(),
 		r.LocalPath(),
 	)
