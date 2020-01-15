@@ -62,6 +62,7 @@ func (r *gitRepo) get(ctx context.Context) error {
 		"--recursive",
 		"-v",
 		"--progress",
+		"--depth 1"
 		r.Remote(),
 		r.LocalPath(),
 	)
